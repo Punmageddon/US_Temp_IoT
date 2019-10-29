@@ -1,0 +1,19 @@
+# ========== Exclude everything ======================= #
+*
+
+# ========== Include source files ===================== #
+# Only allow cpp style suffixes
+!*.hpp
+!*.cpp
+!*.ino
+
+# ========== Include documentation ==================== #
+# Only allow read me files in markdown format
+!*/README.md
+!README.md
+
+# ========== Explicitly handle special files ========== #
+# Don't expose WiFi credentials!
+WiFiCredentials.hpp
+# Include the .gitignore file itself
+!.gitignore
