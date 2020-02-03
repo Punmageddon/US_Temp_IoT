@@ -8,7 +8,7 @@
 !*.ino
 
 # ========== Include documentation ==================== #
-# Only allow read me files in markdown format
+# Only allow "readme" files in markdown format
 !*/README.md
 !README.md
 
