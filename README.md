@@ -3,7 +3,7 @@ Creating a thermometer that uses an ultrasonic transducer that is calibrated to 
 
 ## Dependencies
 * Arduino
-* [PubSubClient](pubsubclient.knolleary.net) library
+* [PubSubClient](https://github.com/knolleary/pubsubclient) library
 
 ## Setup
 1. Set `ssid`, `password`, `clientId` and `topic` in _MqttPublishTask.hpp_
