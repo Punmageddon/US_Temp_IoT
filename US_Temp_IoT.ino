@@ -1,15 +1,16 @@
-#include "WiFiHttpServer.hpp"
+#include <Arduino.h>
 
-WiFiHttpServer server;
+#include "SerialHeartbeatTask.hpp"
+
+SerialHeartbeatTask heartbeat;
 
 void setup() {
   Serial.begin(9600);
   Serial.println("Sketch started");
 
-  server.setup();
+  heartbeat.setup(5000);
 }
 
-
 void loop() {
-  server.loop();
+  heartbeat.loop();
 }
