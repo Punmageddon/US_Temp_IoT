@@ -12,6 +12,7 @@ public:
    * \param interval The interval between heartbeat messages in milliseconds
    */
   void setup(unsigned long interval);
+  
   /**
    * \brief Call once in main Arduino loop
    */
