@@ -13,7 +13,5 @@
 !README.md
 
 # ========== Explicitly handle special files ========== #
-# Don't expose WiFi credentials!
-WiFiCredentials.hpp
 # Include the .gitignore file itself
 !.gitignore
