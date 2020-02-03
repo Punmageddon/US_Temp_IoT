@@ -43,4 +43,5 @@ void MqttPublishTask::loop(void) {
     Serial.println(topic);
     pubSubClient.publish(topic, message.c_str());
   }
+  pubSubClient.loop();
 }
