@@ -1,20 +1,24 @@
 #include <Arduino.h>
 
 #include "SerialHeartbeatTask.hpp"
+#include "WifiConnectionTask.hpp"
 #include "MqttPublishTask.hpp"
 
-SerialHeartbeatTask heartbeat;
+SerialHeartbeatTask heartbeatTask;
+WiFiConnectionTask wifiConnectionTask;
 MqttPublishTask mqttPublishTask;
 
 void setup() {
   Serial.begin(9600);
   Serial.println("Sketch started");
 
-  heartbeat.setup(5000);
+  wifiConnectionTask.setup("**********", "**********");
+  heartbeatTask.setup(5000);
   mqttPublishTask.setup();
 }
 
 void loop() {
-  heartbeat.loop();
+  wifiConnectionTask.loop();
+  heartbeatTask.loop();
   mqttPublishTask.loop();
 }

@@ -20,10 +20,6 @@ public:
    */
   void loop(void);
 private:
-  WiFiClient wifiClient;
-  char* ssid = "**********";
-  char* password = "**********";
-
   PubSubClient pubSubClient;
   char* broker = "broker.hivemq.com";
   char* clientId = "**********";
