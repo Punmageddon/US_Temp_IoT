@@ -1,0 +1,17 @@
+# ========== Exclude everything ======================= #
+*
+
+# ========== Include source files ===================== #
+# Only allow cpp style suffixes
+!*.hpp
+!*.cpp
+!*.ino
+
+# ========== Include documentation ==================== #
+# Only allow "readme" files in markdown format
+!*/README.md
+!README.md
+
+# ========== Explicitly handle special files ========== #
+# Include the .gitignore file itself
+!.gitignore
