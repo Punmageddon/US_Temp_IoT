@@ -8,12 +8,10 @@
 !*.ino
 
 # ========== Include documentation ==================== #
-# Only allow read me files in markdown format
+# Only allow "readme" files in markdown format
 !*/README.md
 !README.md
 
 # ========== Explicitly handle special files ========== #
-# Don't expose WiFi credentials!
-WiFiCredentials.hpp
 # Include the .gitignore file itself
 !.gitignore
