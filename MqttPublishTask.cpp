@@ -22,6 +22,10 @@ void MqttPublishTask::setup(const char* broker, int port, const char* clientId, 
 }
 
 void MqttPublishTask::loop(void) {
+  if (WiFi.status() != WL_CONNECTED) {
+    return;
+  }
+
   static int i = 0;
   if(millis() % 5000 == 0) {
     String message = String("hello MQTT! ") + String(i++);
