@@ -13,5 +13,7 @@
 !README.md
 
 # ========== Explicitly handle special files ========== #
+# Include template for config file
+!template-config.h
 # Include the .gitignore file itself
 !.gitignore

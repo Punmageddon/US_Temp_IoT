@@ -20,8 +20,8 @@ public:
    * \brief Call once in main Arduino loop
    */
   void loop(void);
+  
 private:
-  WiFiClient wifiClient;
   bool isConnected;
 };
 

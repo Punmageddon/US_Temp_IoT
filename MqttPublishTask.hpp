@@ -9,22 +9,31 @@
  */
 class MqttPublishTask {
 public:
-  MqttPublishTask();
   /**
-   * \brief Call initially after Serial.begin(...) to set up task
+   * Constructor
+   * 
+   * \brief wifiClient ESP8266 WifiClient
    */
-  void setup(void);
+  MqttPublishTask(WiFiClient& wifiClient);
+
+  /**
+   * \brief Call initially after Serial.begin(...) and WiFi has been connected to set up task
+   * 
+   * \param broker The hostname of the MQTT broker
+   * \param port The port of the MQTT broker
+   * \param clientId The client id of the MQTT publisher
+   * \param baseTopic The base MQTT topic without trailing backslash
+   */
+  void setup(const char* broker, int port, const char* clientId, const char* baseTopic);
 
   /**
    * \brief Call once in main Arduino loop
    */
   void loop(void);
+
 private:
   PubSubClient pubSubClient;
-  char* broker = "broker.hivemq.com";
-  char* clientId = "**********";
-  int port = 1883;
-  char* topic = "**********";
+  const char* baseTopic;
 };
 
 #endif // MqttPublishTask_hpp
