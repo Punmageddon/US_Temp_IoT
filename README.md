@@ -6,5 +6,6 @@ Creating a thermometer that uses an ultrasonic transducer that is calibrated to 
 * [PubSubClient](https://github.com/knolleary/pubsubclient) library
 
 ## Setup
-1. Set `ssid`, `password`, `clientId` and `topic` in _MqttPublishTask.hpp_
-2. Flash Board
+1. Set `ssid` and `password` in line 15 in _US_Temp_IoT.ino_
+2. Set `clientId` and `topic` in _MqttPublishTask.hpp_
+3. Flash Board
