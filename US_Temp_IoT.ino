@@ -4,15 +4,7 @@
 #include "SerialHeartbeatTask.hpp"
 #include "WifiConnectionTask.hpp"
 #include "MqttPublishTask.hpp"
-
-// WiFi
-const char* ssid;
-const char* password;
-// MQTT
-const char* broker;
-int port;
-const char* clientId;
-const char* baseTopic;
+#include "config.h"
 
 WiFiClient wifiClient;
 
@@ -20,15 +12,15 @@ SerialHeartbeatTask heartbeatTask;
 WiFiConnectionTask wifiConnectionTask;
 MqttPublishTask mqttPublishTask(wifiClient);
 
-void setup() {
-#include "config.h"
+float humidity;
 
+void setup() {
   Serial.begin(9600);
   Serial.println("Sketch started");
 
-  wifiConnectionTask.setup(ssid, password);
-  heartbeatTask.setup(5000);
-  mqttPublishTask.setup(broker, port, clientId, baseTopic);
+  wifiConnectionTask.setup(WIFI_SSID, WIFI_PASSWORD);
+  heartbeatTask.setup(10000);
+  mqttPublishTask.setup(MQTT_BROKER, MQTT_PORT, MQTT_CLIENT_ID, MQTT_BASE_TOPIC, { { "humidity", humidity } }, 1000);
 }
 
 void loop() {

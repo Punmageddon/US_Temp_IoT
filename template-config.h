@@ -1,8 +1,8 @@
 // WiFi
-ssid = "**********";
-password = "**********";
+#define WIFI_SSID "**********"
+#define WIFI_PASSWORD "**********"
 // MQTT
-broker = "broker.hivemq.com";
-port = 1883;
-clientId = "**********";
-baseTopic = "**********";
+#define MQTT_BROKER "broker.hivemq.com"
+#define MQTT_PORT 1883
+#define MQTT_CLIENT_ID "**********"
+#define MQTT_BASE_TOPIC "**********"
