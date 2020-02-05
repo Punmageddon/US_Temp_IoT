@@ -7,5 +7,5 @@ Creating a thermometer that uses an ultrasonic transducer that is calibrated to 
 
 ## Setup
 1. Create _config.h_ based on _template-config.h_
-2. Set the values in the newly created _config.h_ file
+2. Update preprocessor directives in the newly created _config.h_ file
 3. Compile Sketch and Flash Board

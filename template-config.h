@@ -1,3 +1,4 @@
+#define ENABLE_WIFI_MQTT
 // WiFi
 #define WIFI_SSID "**********"
 #define WIFI_PASSWORD "**********"
