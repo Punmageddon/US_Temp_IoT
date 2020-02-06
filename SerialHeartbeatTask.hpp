@@ -2,7 +2,7 @@
 #define SerialHeartbeatTask_hpp
 
 /**
- *  \brief Heartbeat task that regularly prints to Serial, indicating that the main loop is still running
+ *  \brief Heartbeat task that regularly prints some text, indicating that the main loop is still running
  */
 class SerialHeartbeatTask {
 public:
