@@ -16,6 +16,8 @@ MqttPublishTask mqttPublishTask(wifiClient);
 #endif // ENABLE_WIFI_MQTT
 SerialHeartbeatTask heartbeatTask;
 
+float temperatureGroundTruth;
+float temperature;
 float humidity;
 
 void setup() {
@@ -23,7 +25,9 @@ void setup() {
   Serial.println("Sketch started");
 #ifdef ENABLE_WIFI_MQTT
   wifiConnectionTask.setup(WIFI_SSID, WIFI_PASSWORD);
-  mqttPublishTask.setup(MQTT_BROKER, MQTT_PORT, MQTT_CLIENT_ID, MQTT_BASE_TOPIC, { { "humidity", humidity } }, 1000);
+  mqttPublishTask.setup(MQTT_BROKER, MQTT_PORT, MQTT_CLIENT_ID, MQTT_BASE_TOPIC, {
+    { "temperatureGroundTruth", temperatureGroundTruth }, { "temperature", temperature }, { "humidity", humidity }
+  }, 1000);
 #endif // ENABLE_WIFI_MQTT
   heartbeatTask.setup(10000);
 }

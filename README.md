@@ -2,8 +2,8 @@
 Creating a thermometer that uses an ultrasonic transducer that is calibrated to a set distance by a laser time of flight sensor to measure the average temperature of a given stretch of air.
 
 ## Dependencies
-* Arduino (ESP8266)
-* [PubSubClient](https://github.com/knolleary/pubsubclient) library
+* [Arduino for ESP8266](https://github.com/esp8266/Arduino)
+* [PubSubClient](https://github.com/knolleary/pubsubclient)
 
 ## Setup
 1. Create _config.h_ based on _template-config.h_

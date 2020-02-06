@@ -26,8 +26,9 @@ public:
    * \param baseTopic The base MQTT topic without trailing backslash
    * \param subTopicSources The map of subTopics without leading backslash and float value data sources
    * \param interval The time between publishing new values or reconnection attempts
+   * \param blocking If this is true and WiFi has been connected, the execution will block until successful connection to broker 
    */
-  void setup(const char* broker, int port, const char* clientId, const char* baseTopic, std::map<const char*, float&> subTopicsSources, unsigned long interval);
+  void setup(const char* broker, int port, const char* clientId, const char* baseTopic, std::map<const char*, float&> subTopicsSources, unsigned long interval, bool blocking = false);
 
   /**
    * \brief Call once in main Arduino loop
@@ -42,6 +43,16 @@ private:
   bool isConnected;
   unsigned long interval;
   unsigned long millisPublishNext;
+
+  /**
+   * \brief Publishes data to the broker
+   */
+  void publish(void);
+
+  /**
+   * \brief Prints MQTT client status changes
+   */
+  void updateStatus(void);
 };
 
 #endif // MqttPublishTask_hpp
