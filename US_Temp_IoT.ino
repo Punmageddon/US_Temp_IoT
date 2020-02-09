@@ -25,7 +25,8 @@ void setup() {
   Serial.println("Sketch started");
 #ifdef ENABLE_WIFI_MQTT
   wifiConnectionTask.setup(WIFI_SSID, WIFI_PASSWORD);
-  mqttPublishTask.setup(MQTT_BROKER, MQTT_PORT, MQTT_CLIENT_ID, MQTT_BASE_TOPIC, {
+  MqttPublishTask::ConnectionSettings mqttConnectionSettings = { MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, MQTT_CLIENT_ID };
+  mqttPublishTask.setup(mqttConnectionSettings, MQTT_BASE_TOPIC, {
     { "temperatureGroundTruth", temperatureGroundTruth }, { "temperature", temperature }, { "humidity", humidity }
   }, 1000);
 #endif // ENABLE_WIFI_MQTT

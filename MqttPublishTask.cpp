@@ -6,16 +6,16 @@ MqttPublishTask::MqttPublishTask(WiFiClient& wifiClient) {
   pubSubClient = PubSubClient(wifiClient);
 }
 
-void MqttPublishTask::setup(const char* broker, int port, const char* clientId, const char* baseTopic, std::map<const char*, float&> subTopicsSources, unsigned long interval, bool blocking) {
+void MqttPublishTask::setup(const ConnectionSettings connectionSettings, const char* baseTopic, std::map<const char*, float&> subTopicsSources, unsigned long interval, bool blocking) {
+  this->connectionSettings = connectionSettings;
   this->baseTopic = baseTopic;
-  this->clientId = clientId;
   this->interval = interval;
   this->subTopicsSources = subTopicsSources;
-  pubSubClient.setServer(broker, port);
+  pubSubClient.setServer(connectionSettings.broker, connectionSettings.port);
   Serial.print("Connecting to MQTT broker ");
-  Serial.print(broker);
+  Serial.print(connectionSettings.broker);
   Serial.print(":");
-  Serial.print(port);
+  Serial.print(connectionSettings.port);
   isConnected = false;
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println();
@@ -23,7 +23,7 @@ void MqttPublishTask::setup(const char* broker, int port, const char* clientId, 
   }
   else {
     do {
-      isConnected = pubSubClient.connect(clientId);
+      isConnected = pubSubClient.connect(connectionSettings.clientId, connectionSettings.user, connectionSettings.password);
       if(!isConnected && blocking) {
         delay(500);
         Serial.print(".");
@@ -46,7 +46,7 @@ void MqttPublishTask::loop(void) {
     if(isConnected) {
       publish();
     }
-    else if(pubSubClient.connect(clientId)) {
+    else if(pubSubClient.connect(connectionSettings.clientId, connectionSettings.user, connectionSettings.password)) {
       updateStatus();
       publish();
     }
