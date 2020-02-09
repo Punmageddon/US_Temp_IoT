@@ -52,7 +52,6 @@ public:
    * \param interval The time between publishing new values or reconnection attempts
    * \param blocking If this is true and WiFi has been connected, the execution will block until successful connection to broker 
    */
-  //void setup(const char* broker, int port, const char* user, const char* password, const char* clientId, const char* baseTopic, std::map<const char*, float&> subTopicsSources, unsigned long interval, bool blocking = false);
   void setup(const ConnectionSettings connectionSettings, const char* baseTopic, std::map<const char*, float&> subTopicsSources, unsigned long interval, bool blocking = false);
 
   /**
