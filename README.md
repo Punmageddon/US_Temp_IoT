@@ -4,6 +4,7 @@ Creating a thermometer that uses an ultrasonic transducer that is calibrated to 
 ## Dependencies
 * [Arduino for ESP8266](https://github.com/esp8266/Arduino)
 * [PubSubClient](https://github.com/knolleary/pubsubclient)
+* [SparkFun BME280 Arduino Library](https://github.com/sparkfun/SparkFun_BME280_Arduino_Library)
 
 ## Setup
 1. Create _config.h_ based on _template-config.h_
