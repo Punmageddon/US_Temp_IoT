@@ -9,7 +9,7 @@
 #define WIFI_PASSWORD "**********"
 
 // MQTT
-#define MQTT_BROKER "broker.hivemq.com"
+#define MQTT_BROKER "test.mosquitto.org"
 #define MQTT_USER NULL
 #define MQTT_PASSWORD NULL
 #define MQTT_PORT 1883
