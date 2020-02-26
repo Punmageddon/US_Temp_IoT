@@ -7,6 +7,9 @@
 !*.cpp
 !*.ino
 
+# ========== Include python scripts =================== #
+!*.py
+
 # ========== Include documentation ==================== #
 # Only allow "readme" files in markdown format
 !*/README.md
