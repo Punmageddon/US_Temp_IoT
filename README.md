@@ -1,5 +1,7 @@
 # US_Temp_IoT
-Creating a thermometer that uses an ultrasonic transducer that is calibrated to a set distance by a laser time of flight sensor to measure the average temperature of a given stretch of air.
+Creating a thermometer that uses an ultrasonic transducer that is calibrated to a set distance by a laser time of flight sensor to measure the average temperature of a given stretch of air.  
+Ground truth readings are provided by a [BME280 sensor](https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/).  
+Readings can be stored on an SD card or broadcast over MQTT.
 
 ## Dependencies
 * [Arduino for ESP8266](https://github.com/esp8266/Arduino)
