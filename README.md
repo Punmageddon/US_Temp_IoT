@@ -11,7 +11,7 @@ Creating a thermometer that uses an ultrasonic transducer that is calibrated to 
 2. Update preprocessor directives in the newly created _config.h_ file
 3. Compile Sketch and Flash Board
 
-## Recording data
+## Recording data (over the internet)
 You can use another computer like a Raspberry Pi to record the measurements that are published to the MQTT broker.
 1. Install the [Eclipse Paho™ MQTT Python Client](https://github.com/eclipse/paho.mqtt.python)
 2. Run `./recorder.py -b MQTT_BROKER -s MQTT_BASE_TOPIC -o measurements.csv`  

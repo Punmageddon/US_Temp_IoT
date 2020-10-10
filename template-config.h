@@ -1,6 +1,14 @@
-// I2C
-#define I2C_SDA D6
-#define I2C_SCL D7
+#define INITIALIZATION_LED LED_BUILTIN
+
+// I2C (Lolin NodeMCU aka "NodeMCU V3")
+#define I2C_SDA D2
+#define I2C_SCL D1
+
+// SPI (On Lolin NodeMCU aka "NodeMCU V3": CLK = D5, MISO = D6, MOSI = D7)
+#define SPI_CHIP_SELECT_SD D8
+
+#define ENABLE_SDCARD // Remove to disable
+#define FILENAME "/sensor.csv"
 
 #define ENABLE_WIFI_MQTT // Remove to disable
 
