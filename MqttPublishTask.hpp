@@ -77,6 +77,13 @@ private:
    * \brief Prints MQTT client status changes
    */
   void updateStatus(void);
+
+  /**
+   * \brief Attempt to connect MQTT client
+   * 
+   * \return True, if connected sucessfully
+   */
+  bool connect(void);
 };
 
 #endif // MqttPublishTask_hpp

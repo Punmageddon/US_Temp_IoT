@@ -2,6 +2,7 @@
 #include <map>
 
 #include "config.h"
+#include "SDCardConfigReader.hpp"
 #include "SerialHeartbeatTask.hpp"
 #include "BME280Task.hpp"
 #include "SDCardLoggerTask.hpp"
@@ -25,9 +26,24 @@ BME280Task bme280Task;
 SDCardLoggerTask sdcardLoggerTask;
 #endif // ENABLE_SDCARD
 
+// Shared memory
 float temperatureGroundTruth;
 float temperature;
 float humidity;
+
+// Configuration
+int bme280Interval = BME280_INTERVAL;
+int sdcardInterval = SDCARD_INTERVAL;
+String wifiSsid(WIFI_SSID);
+String wifiPassword(WIFI_PASSWORD);
+String filenameReadings(FILENAME_READINGS);
+String mqttBroker(MQTT_BROKER);
+int mqttPort = MQTT_PORT;
+String mqttUser(MQTT_USER);
+String mqttPassword(MQTT_PASSWORD);
+String mqttClientId(MQTT_CLIENT_ID);
+String mqttBaseTopic(MQTT_BASE_TOPIC);
+int mqttInterval = MQTT_INTERVAL;
 
 void setup() {
   pinMode(INITIALIZATION_LED, OUTPUT);
@@ -35,18 +51,35 @@ void setup() {
   delay(500);
   Serial.begin(9600);
   Serial.println("Sketch started");
+#ifdef ENABLE_SDCARD
+  SDCardConfigReader().updateConfigs(SPI_CHIP_SELECT_SD, FILENAME_CONFIG, {
+    { "WIFI_SSID", wifiSsid },
+    { "WIFI_PASSWORD", wifiPassword },
+    { "FILENAME_READINGS", filenameReadings },
+    { "MQTT_BROKER", mqttBroker },
+    { "MQTT_USER", mqttUser },
+    { "MQTT_PASSWORD", mqttPassword },
+    { "MQTT_CLIENT_ID", mqttClientId },
+    { "MQTT_BASE_TOPIC", mqttBaseTopic }
+  }, {
+    { "BME280_INTERVAL", bme280Interval },
+    { "SDCARD_INTERVAL", sdcardInterval },
+    { "MQTT_PORT", mqttPort },
+    { "MQTT_INTERVAL", mqttInterval }
+  });
+#endif // ENABLE_SDCARD
   Wire.begin(I2C_SDA, I2C_SCL);
-  bme280Task.setup(temperatureGroundTruth, humidity, 1000);
+  bme280Task.setup(temperatureGroundTruth, humidity, bme280Interval);
   std::map<const char*, float&> datapointNameToValueMapping = {
     { "temperatureGroundTruth", temperatureGroundTruth }, { "temperature", temperature }, { "humidity", humidity }
   };
 #ifdef ENABLE_SDCARD
-  sdcardLoggerTask.setup(SPI_CHIP_SELECT_SD, FILENAME, datapointNameToValueMapping, 1000);
+  sdcardLoggerTask.setup(SPI_CHIP_SELECT_SD, filenameReadings.c_str(), datapointNameToValueMapping, sdcardInterval);
 #endif // ENABLE_SDCARD
 #ifdef ENABLE_WIFI_MQTT
-  wifiConnectionTask.setup(WIFI_SSID, WIFI_PASSWORD);
-  MqttPublishTask::ConnectionSettings mqttConnectionSettings = { MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, MQTT_CLIENT_ID };
-  mqttPublishTask.setup(mqttConnectionSettings, MQTT_BASE_TOPIC, datapointNameToValueMapping, 1000);
+  wifiConnectionTask.setup(wifiSsid.c_str(), wifiPassword.c_str());
+  MqttPublishTask::ConnectionSettings mqttConnectionSettings = { mqttBroker.c_str(), mqttPort, mqttUser.c_str(), mqttPassword.c_str(), mqttClientId.c_str() };
+  mqttPublishTask.setup(mqttConnectionSettings, mqttBaseTopic.c_str(), datapointNameToValueMapping, mqttInterval);
 #endif // ENABLE_WIFI_MQTT
   heartbeatTask.setup(10000);
   delay(500);

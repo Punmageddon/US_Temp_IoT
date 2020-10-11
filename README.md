@@ -10,6 +10,7 @@ Creating a thermometer that uses an ultrasonic transducer that is calibrated to 
 1. Create _config.h_ based on _template-config.h_
 2. Update preprocessor directives in the newly created _config.h_ file
 3. Compile Sketch and Flash Board
+4. (Use _config.txt_ based on _template-config.txt_ on the SD card to apply configs on startup)
 
 ## Recording data (over the internet)
 You can use another computer like a Raspberry Pi to record the measurements that are published to the MQTT broker.

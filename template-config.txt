@@ -1,0 +1,15 @@
+BME280_INTERVAL=1000
+SDCARD_INTERVAL=1000 ; Set to 0 to disable logging to SD card
+
+; WIFI settings
+WIFI_SSID=**********
+WIFI_PASSWORD=**********
+
+; MQTT configurations
+MQTT_BROKER=test.mosquitto.org
+MQTT_USER=
+MQTT_PASSWORD=
+MQTT_PORT=1883
+MQTT_CLIENT_ID=**********
+MQTT_BASE_TOPIC=**********
+MQTT_INTERVAL=1000 ; Set to 0 to disable MQTT

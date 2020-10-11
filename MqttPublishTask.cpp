@@ -17,13 +17,14 @@ void MqttPublishTask::setup(const ConnectionSettings connectionSettings, const c
   Serial.print(":");
   Serial.print(connectionSettings.port);
   isConnected = false;
-  if (WiFi.status() != WL_CONNECTED) {
+  if(interval == 0){ /* MQTT disabled */ }
+  else if (WiFi.status() != WL_CONNECTED) {
     Serial.println();
     Serial.println("Postponed connecting MQTT client, because WiFi is not connected");
   }
   else {
     do {
-      isConnected = pubSubClient.connect(connectionSettings.clientId, connectionSettings.user, connectionSettings.password);
+      isConnected = connect();
       if(!isConnected && blocking) {
         delay(500);
         Serial.print(".");
@@ -36,7 +37,19 @@ void MqttPublishTask::setup(const ConnectionSettings connectionSettings, const c
   }
 }
 
+bool MqttPublishTask::connect(void) {
+  return pubSubClient.connect(
+    connectionSettings.clientId,
+    connectionSettings.user[0] != '\0' ? connectionSettings.user : NULL,
+    connectionSettings.password[0] != '\0' ? connectionSettings.password : NULL
+  );
+}
+
 void MqttPublishTask::loop(void) {
+  if(interval == 0){
+    /* MQTT disabled */
+    return;
+  }
   updateStatus();
   if (WiFi.status() != WL_CONNECTED) {
     return;
@@ -58,7 +71,7 @@ void MqttPublishTask::loop(void) {
 void MqttPublishTask::publish(void) {
   for(const auto& subTopicSource : subTopicsSources) {
     String topic = String(baseTopic) + "/" + String(subTopicSource.first);
-    String message = String(subTopicSource.second);
+    String message(subTopicSource.second);
     Serial.print("Publishing ");
     Serial.print(message);
     Serial.print(" to ");

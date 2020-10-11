@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <SPI.h>
 #include <SD.h>
 
 #include "SDCardLoggerTask.hpp"
@@ -13,6 +12,10 @@ void SDCardLoggerTask::setup(const int spiChipSelect, const char* filename, std:
 }
 
 void SDCardLoggerTask::loop(void) {
+  if(interval == 0){
+    /* Logging disabled */
+    return;
+  }
   unsigned long currentMillis = millis();
   if(currentMillis >= millisStoreNext) {
     if(!isSDCardAvailiable) {
